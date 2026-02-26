@@ -1,0 +1,8 @@
+.venv
+.python-version
+__pycache__/
+*.pyc
+.idea
+
+# Ignore the .env file if it exists
+.env
