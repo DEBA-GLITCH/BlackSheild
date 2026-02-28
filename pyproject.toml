@@ -1,7 +1,63 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "blackshield"
+name = "blacksheild"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+description = "Threat Intelligence Orchestrator - LangGraph + Chroma + External APIs"
+requires-python = ">=3.11"
+dependencies = [
+    # Orchestration
+    "langgraph>=0.2.0",
+    "langchain-core>=0.3.0",
+    "langsmith>=0.1.0",
+
+    # HTTP + Retry
+    "httpx>=0.27.0",
+    "tenacity>=8.3.0",
+
+    # Data validation
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
+
+    # Vector DB
+    "chromadb>=0.5.0",
+
+    # Embeddings (local, no API key)
+    "sentence-transformers>=3.0.0",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "structlog>=24.1.0",
+    "orjson>=3.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-httpx>=0.30.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["blacksheild*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
