@@ -6,3 +6,6 @@ __pycache__/
 
 # Ignore the .env file if it exists
 .env
+
+tests
+reports
